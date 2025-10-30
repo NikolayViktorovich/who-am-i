@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Николай Викторович | Frontend Developer</title>
+    <meta name="description" content="Middle Frontend Developer - React, Vue, Next.js, TypeScript">
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="manifest.json">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'montserrat': ['Montserrat', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-montserrat bg-gray-50 dark:bg-black text-gray-800 dark:text-gray-100 min-h-screen transition-colors duration-300">
+    <div class="studio-lights">
+        <div class="spotlight spotlight-1"></div>
+        <div class="spotlight spotlight-2"></div>
+        <div class="spotlight spotlight-3"></div>
+    </div>
+    <button id="themeToggle" class="fixed top-6 right-6 z-50 p-3 rounded-full bg-white dark:bg-gray-900 shadow-lg hover:scale-110 transition-all duration-300 border border-gray-200 dark:border-gray-800">
+        <i class="fas fa-moon text-gray-600 dark:text-gray-400"></i>
+    </button>
+    <div class="container mx-auto px-4 py-8 max-w-5xl relative z-10">
+        <header class="text-center mb-16 fade-in">
+            <div class="mb-8">
+                <div class="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-gray-800 to-black dark:from-gray-700 dark:to-gray-900 flex items-center justify-center shadow-2xl">
+                    <span class="text-3xl font-bold text-white">NV</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white tracking-tight main-title-glow" data-text="НИКОЛАЙ ВИКТОРОВИЧ">
+                    НИКОЛАЙ ВИКТОРОВИЧ
+                </h1>
+                <div class="typewriter-container">
+                    <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-2 typewriter">Middle Frontend Developer</p>
+                </div>
+                <p class="text-md text-gray-500 dark:text-gray-500 mb-6">React • Vue • Next.js • TypeScript</p>
+            </div>
+            <div class="flex justify-center space-x-8 mt-6">
+                <a href="https://t.me/shouldcleanmyroom" class="social-link" target="_blank">
+                    <i class="fab fa-telegram mr-2"></i>Telegram
+                </a>
+                <a href="mailto:n.golubtsov05@bk.ru" class="social-link">
+                    <i class="far fa-envelope mr-2"></i>Email
+                </a>
+                <a href="https://github.com/NikolayViktorovich" class="social-link" target="_blank">
+                    <i class="fab fa-github mr-2"></i>GitHub
+                </a>
+            </div>
+        </header>
+
+        <main class="space-y-16">
+            <section class="scroll-animate">
+                <h2 class="section-title">О СЕБЕ</h2>
+                <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-800">
+                    <p class="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                        Middle Frontend Developer с <span class="highlight">3+ года</span> коммерческого опыта и интенсивного самообучения. 
+                        <span class="highlight">15+ pet-проектов</span>.<br><br>
+                        Специализируюсь на <span class="tech-highlight">React, Vue, Next.js, TypeScript, PWA, CI/CD, AI-интеграции</span>.<br><br>
+                        Создал Notion-клон с реалтайм-синхронизацией, CRM-систему с RBAC, аналитический дашборд.<br><br>
+                        <span class="gradient-text neon-glow">Готов к удалённой работе с первого дня</span> - чистый код, тесты, деплой, документация.
+                    </p>
+                </div>
+            </section>
+            <section class="scroll-animate">
+                <h2 class="section-title">ПРОЕКТЫ</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="project-card group">
+                        <div class="project-image bg-gradient-to-br from-gray-800 to-black rounded-t-xl h-40 flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            <i class="fas fa-sticky-note text-white text-4xl z-10 group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Notion-клон</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm leading-relaxed">Реалтайм-синхронизация с использованием React и WebRTC</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Zustand</span>
+                                <span class="tech-tag">REST API</span>
+                                <span class="tech-tag">WebRTC</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card group">
+                        <div class="project-image bg-gradient-to-br from-gray-700 to-gray-900 rounded-t-xl h-40 flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            <i class="fas fa-chart-line text-white text-4xl z-10 group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">CRM система</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm leading-relaxed">Полнофункциональная CRM (коммерческий проект)</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="tech-tag">Next.js</span>
+                                <span class="tech-tag">TypeScript</span>
+                                <span class="tech-tag">mySQL</span>
+                                <span class="tech-tag">REST API</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card group">
+                        <div class="project-image bg-gradient-to-br from-gray-800 to-gray-950 rounded-t-xl h-40 flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            <i class="fas fa-robot text-white text-4xl z-10 group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">AI Dashboard</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm leading-relaxed">Интеграция с OpenAI и продвинутая аналитика</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="tech-tag">Next.js</span>
+                                <span class="tech-tag">OpenAI</span>
+                                <span class="tech-tag">Chart.js</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="scroll-animate">
+                <h2 class="section-title">ТЕХНОЛОГИИ</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="tech-card">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white flex items-center">
+                            <i class="fas fa-code mr-3 text-blue-600"></i>Frontend
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400">React, Next.js, TypeScript, Vue.js, Redux, Zustand, React Query</p>
+                    </div>
+                    <div class="tech-card">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white flex items-center">
+                            <i class="fas fa-palette mr-3 text-green-600"></i>Стилизация
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400">Tailwind CSS, Styled-Components, Framer Motion</p>
+                    </div>
+                    <div class="tech-card">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white flex items-center">
+                            <i class="fas fa-server mr-3 text-purple-600"></i>Бэкенд
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400">Node.js, Firebase</p>
+                    </div>
+                    <div class="tech-card">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white flex items-center">
+                            <i class="fas fa-vial mr-3 text-red-600"></i>Тестирование & Деплой
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400">Jest, React Testing Library, Vercel, Netlify, GitHub Actions</p>
+                    </div>
+                    <div class="tech-card md:col-span-2">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white flex items-center">
+                            <i class="fas fa-tools mr-3 text-yellow-600"></i>Другое
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400">PWA, WebRTC, OpenAI, Figma, Git, CI/CD</p>
+                    </div>
+                </div>
+            </section>
+            <section class="scroll-animate">
+                <h2 class="section-title">ОБРАЗОВАНИЕ</h2>
+                <div class="space-y-6">
+                    <div class="edu-card">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Самообучение — 2021–2025</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-3">Udemy, YouTube, Frontend Masters, LeetCode</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-500">Практика: <span class="text-green-600 dark:text-green-400 font-medium">15+ pet-проектов</span>, open-source вклад</p>
+                            </div>
+                            <i class="fas fa-graduation-cap text-gray-400 text-2xl mt-1"></i>
+                        </div>
+                    </div>
+                    <div class="edu-card">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Высшее образование</h3>
+                                <p class="text-gray-600 dark:text-gray-400">Информационные системы и технологии</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-500 mt-2">C#, Python, алгоритмы, базы данных</p>
+                            </div>
+                            <i class="fas fa-university text-gray-400 text-2xl mt-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="scroll-animate">
+                <h2 class="section-title">ДОПОЛНИТЕЛЬНО</h2>
+                <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-800">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        <div class="flex items-start space-x-4">
+                            <i class="fas fa-trophy text-yellow-600 text-xl mt-2"></i>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Участник хакатонов</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">Сбер, Яндекс и другие технологические компании</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <i class="fab fa-telegram text-blue-600 text-xl mt-1"></i>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Telegram-канал</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">
+                                    <a href="https://t.me/ssshould" class="hover:underline" target="_blank">@ssshould</a> - про жизнь разработчика
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <i class="fas fa-bolt text-green-600 text-xl mt-1"></i>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Быстрый старт</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">Готов к тестовому заданию за 4 часа</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <i class="fas fa-rocket text-purple-600 text-xl mt-1"></i>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Доступность</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">Могу выйти на работу завтра</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-20 pt-8 border-t border-gray-200 dark:border-gray-800 text-gray-500 dark:text-gray-500 fade-in">
+            <p>© 2025 Николай Викторович. Сделано с ❤️ и кофе.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
