@@ -60,6 +60,114 @@ class ScrollAnimator {
     }
 }
 
+class LightEffects {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        const lightObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('light-hit');
+                    setTimeout(() => {
+                        entry.target.classList.remove('light-hit');
+                    }, 2000);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.tech-card, .project-card, .edu-card, .main-title-glow').forEach(el => {
+            lightObserver.observe(el);
+        });
+
+        this.randomLightFlashes();
+    }
+
+    randomLightFlashes() {
+        setInterval(() => {
+            const elements = document.querySelectorAll('.tech-card, .project-card, .edu-card');
+            if (elements.length > 0) {
+                const randomElement = elements[Math.floor(Math.random() * elements.length)];
+                randomElement.classList.add('light-hit');
+                setTimeout(() => {
+                    randomElement.classList.remove('light-hit');
+                }, 2000);
+            }
+        }, 8000);
+    }
+}
+
+class ContactForm {
+    constructor() {
+        this.form = document.getElementById('contactForm');
+        this.init();
+    }
+
+    init() {
+        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+    }
+
+    async handleSubmit(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this.form);
+        const submitBtn = this.form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Отправка...';
+        submitBtn.disabled = true;
+        
+        try {
+            await this.sendFormData(formData);
+            this.showSuccess();
+            this.form.reset();
+        } catch (error) {
+            this.showError();
+        } finally {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }
+    }
+
+    async sendFormData(formData) {
+        const response = await fetch('https://formspree.io/f/your-form-id', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        if (!response.ok) throw new Error('Ошибка отправки');
+        return response.json();
+    }
+
+    showSuccess() {
+        this.showNotification('Сообщение отправлено успешно!', 'success');
+    }
+
+    showError() {
+        this.showNotification('Ошибка отправки. Попробуйте еще раз.', 'error');
+    }
+
+    showNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.className = `fixed top-6 left-1/2 transform -translate-x-1/2 z-50 px-6 py-3 rounded-lg shadow-lg transition-all duration-300 ${
+            type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+        }`;
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            notification.style.transform = 'translate(-50%, -20px)';
+            setTimeout(() => notification.remove(), 300);
+        }, 4000);
+    }
+}
+
 class SmoothScroll {
     constructor() {
         this.init();
@@ -81,11 +189,91 @@ class SmoothScroll {
     }
 }
 
+class PdfExporter {
+    constructor() {
+        this.downloadBtn = document.getElementById('downloadPdf');
+        this.init();
+    }
+
+    init() {
+        if (this.downloadBtn) {
+            this.downloadBtn.addEventListener('click', () => this.generatePdf());
+        }
+    }
+
+    async generatePdf() {
+        this.showNotification('Подготовка PDF...', 'info');
+        
+        try {
+            const element = document.querySelector('.container.mx-auto.px-4.py-8.max-w-5xl');
+            
+            const opt = {
+                margin: [10, 10, 10, 10],
+                filename: 'Николай-Викторович-Frontend-Developer.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { 
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    backgroundColor: '#ffffff'
+                },
+                jsPDF: { 
+                    unit: 'mm', 
+                    format: 'a4', 
+                    orientation: 'portrait' 
+                }
+            };
+
+            await html2pdf().set(opt).from(element).save();
+            
+            this.showNotification('PDF успешно создан!', 'success');
+            
+        } catch (error) {
+            console.error('Ошибка при создании PDF:', error);
+            this.showNotification('Ошибка при создании PDF', 'error');
+            this.fallbackPdf();
+        }
+    }
+
+    fallbackPdf() {
+        this.showNotification('Используем альтернативный метод...', 'info');
+        setTimeout(() => {
+            window.print();
+        }, 1000);
+    }
+
+    showNotification(message, type) {
+        const existingNotifications = document.querySelectorAll('.pdf-notification');
+        existingNotifications.forEach(notification => notification.remove());
+        
+        const notification = document.createElement('div');
+        notification.className = `pdf-notification fixed top-6 left-1/2 transform -translate-x-1/2 z-50 px-6 py-3 rounded-lg shadow-lg transition-all duration-300 ${
+            type === 'success' ? 'bg-green-500' : 
+            type === 'error' ? 'bg-red-500' : 'bg-blue-500'
+        } text-white`;
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            notification.style.transform = 'translate(-50%, -20px)';
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 300);
+        }, 3000);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     new ThemeManager();
     new ScrollAnimator();
+    new LightEffects();
     new ContactForm();
     new SmoothScroll();
+    new PdfExporter();
 
     document.querySelectorAll('.project-card').forEach(card => {
         card.addEventListener('mouseenter', function() {
