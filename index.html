@@ -9,6 +9,7 @@
     <link rel="manifest" href="manifest.json">
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -41,119 +42,127 @@
         <div class="spotlight spotlight-2"></div>
         <div class="spotlight spotlight-3"></div>
     </div>
+    
     <button id="themeToggle" class="fixed top-6 right-6 z-50 p-3 rounded-full bg-white dark:bg-gray-900 shadow-lg hover:scale-110 transition-all duration-300 border border-gray-200 dark:border-gray-800">
-        <i class="fas fa-moon text-gray-60 ds0 dark:text-gray-400"></i>
+        <i class="fas fa-moon text-gray-600 dark:text-gray-400"></i>
     </button>
-    <div class="container mx-auto px-4 py-8 max-w-5xl relative z-10">
-<header class="text-center mb-16 fade-in">
-    <div class="mb-8">
-        <div class="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-gray-800 to-black dark:from-gray-700 dark:to-gray-900 flex items-center justify-center shadow-2xl overflow-hidden">
-            <img src="avatars.jpg" alt="Николай Викторович" class="w-full h-full object-cover">
-        </div>
-        <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white tracking-tight main-title-glow" data-text="НИКОЛАЙ ВИКТОРОВИЧ">
-            НИКОЛАЙ ВИКТОРОВИЧ
-        </h1>
-        <div class="typewriter-container">
-            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-2 typewriter">Middle Frontend Developer</p>
-        </div>
-        <p class="text-md text-gray-500 dark:text-gray-500 mb-6">React • Vue • Next.js • TypeScript</p>
-    </div>
-    <div class="flex justify-center space-x-8 mt-6">
-        <a href="https://t.me/shouldcleanmyroom" class="social-link" target="_blank">
-            <i class="fab fa-telegram mr-2"></i>Telegram
-        </a>
-        <a href="mailto:n.golubtsov05@bk.ru" class="social-link">
-            <i class="far fa-envelope mr-2"></i>Email
-        </a>
-        <a href="https://github.com/NikolayViktorovich" class="social-link" target="_blank">
-            <i class="fab fa-github mr-2"></i>GitHub
-        </a>
-    </div>
-</header>
+
+    <button id="downloadPdf" class="fixed bottom-6 right-6 z-50 p-4 bg-gray-900 hover:bg-gray-800 text-white rounded-full shadow-lg transition-all duration-300">
+        <i class="fas fa-file-pdf text-xl"></i>
+    </button>
+
+    <div class="container mx-auto px-4 py-8 max-w-5xl relative z-10" id="resume-content">
+        <header class="text-center mb-16 fade-in">
+            <div class="mb-8">
+                <div class="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-gray-800 to-black dark:from-gray-700 dark:to-gray-900 flex items-center justify-center shadow-2xl overflow-hidden">
+                    <img src="avatars.jpg" alt="Николай Викторович" class="w-full h-full object-cover">
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white tracking-tight main-title-glow" data-text="НИКОЛАЙ ВИКТОРОВИЧ">
+                    НИКОЛАЙ ВИКТОРОВИЧ
+                </h1>
+                <div class="typewriter-container">
+                    <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-2 typewriter">Middle Frontend Developer</p>
+                </div>
+                <p class="text-md text-gray-500 dark:text-gray-500 mb-6">React • Vue • Next.js • TypeScript</p>
+            </div>
+            <div class="flex justify-center space-x-8 mt-6">
+                <a href="https://t.me/shouldcleanmyroom" class="social-link" target="_blank">
+                    <i class="fab fa-telegram mr-2"></i>Telegram
+                </a>
+                <a href="mailto:n.golubtsov05@bk.ru" class="social-link">
+                    <i class="far fa-envelope mr-2"></i>Email
+                </a>
+                <a href="https://github.com/NikolayViktorovich" class="social-link" target="_blank">
+                    <i class="fab fa-github mr-2"></i>GitHub
+                </a>
+            </div>
+        </header>
 
         <main class="space-y-16">
             <section class="scroll-animate">
-    <h2 class="section-title">О СЕБЕ</h2>
-    <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-800">
-        <p class="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-            <strong>Middle Frontend Developer</strong> с <span class="highlight">3+ года коммерческого опыта</span> и интенсивного самообучения. 
-            <span class="highlight">15+ pet-проектов</span>.<br><br>
-            
-            <strong>Специализируюсь</strong> на <span class="tech-highlight">React, Vue, Next.js, TypeScript, PWA, CI/CD, AI-интеграции</span>.<br><br>
-            
-            <strong>Разработчик и основатель бизнес-проекта:</strong> 
-            <a href="https://ghostproduceredm.com" target="_blank" class="font-bold text-blue-600 dark:text-blue-400 hover:underline">ghostproduceredm.com</a><br><br>
-            
-            <span class="gradient-text">Готов к удалённой работе с первого дня</span> - <strong>чистый код, тесты, деплой, документация</strong>.
-        </p>
-    </div>
-</section>
+                <h2 class="section-title">О СЕБЕ</h2>
+                <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-800">
+                    <p class="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                        <strong>Middle Frontend Developer</strong> с <span class="highlight">3+ года коммерческого опыта</span> и интенсивного самообучения. 
+                        <span class="highlight">15+ pet-проектов</span>.<br><br>
+                        
+                        <strong>Специализируюсь</strong> на <span class="tech-highlight">React, Vue, Next.js, TypeScript, PWA, CI/CD, AI-интеграции</span>.<br><br>
+                        
+                        <strong>Разработчик и основатель бизнес-проекта:</strong> 
+                        <a href="https://ghostproduceredm.com" target="_blank" class="font-bold text-blue-600 dark:text-blue-400 hover:underline">ghostproduceredm.com</a><br><br>
+                        
+                        <span class="gradient-text">Готов к удалённой работе с первого дня</span> - <strong>чистый код, тесты, деплой, документация</strong>.
+                    </p>
+                </div>
+            </section>
+
             <section class="scroll-animate">
-    <h2 class="section-title">ПРОЕКТЫ</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="project-card group flex flex-col">
-            <div class="project-image bg-gradient-to-br from-gray-800 to-black rounded-t-xl h-40 flex items-center justify-center relative overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                <i class="fas fa-sticky-note text-white text-4xl z-10 group-hover:scale-110 transition-transform duration-300"></i>
-            </div>
-            <div class="p-6 flex flex-col flex-grow">
-                <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Notion-клон</h3>
-                <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm leading-relaxed flex-grow">Реалтайм-синхронизация с использованием React и WebRTC</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                    <span class="tech-tag">React |</span>
-                    <span class="tech-tag">Zustand |</span>
-                    <span class="tech-tag">REST API |</span>
-                    <span class="tech-tag">WebRTC |</span>
+                <h2 class="section-title">ПРОЕКТЫ</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="project-card group flex flex-col">
+                        <div class="project-image bg-gradient-to-br from-gray-800 to-black rounded-t-xl h-40 flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            <i class="fas fa-sticky-note text-white text-4xl z-10 group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Notion-клон</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm leading-relaxed flex-grow">Реалтайм-синхронизация с использованием React и WebRTC</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="tech-tag">React |</span>
+                                <span class="tech-tag">Zustand |</span>
+                                <span class="tech-tag">REST API |</span>
+                                <span class="tech-tag">WebRTC |</span>
+                            </div>
+                            <a href="https://github.com/NikolayViktorovich/notion-clone" target="_blank" class="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 mt-auto">
+                                <i class="fab fa-github"></i>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card group flex flex-col">
+                        <div class="project-image bg-gradient-to-br from-gray-700 to-gray-900 rounded-t-xl h-40 flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            <i class="fas fa-chart-line text-white text-4xl z-10 group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">CRM система</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm leading-relaxed flex-grow">Полнофункциональная CRM (коммерческий проект)</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="tech-tag">Next.js |</span>
+                                <span class="tech-tag">TypeScript |</span>
+                                <span class="tech-tag">mySQL |</span>
+                                <span class="tech-tag">REST API |</span>
+                            </div>
+                            <button class="w-full bg-gray-300 dark:bg-gray-700 text-gray-600 dark:text-gray-400 font-medium py-2 px-4 rounded-lg cursor-not-allowed flex items-center justify-center gap-2 mt-auto">
+                                <i class="fas fa-lock"></i>
+                                Private
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card group flex flex-col">
+                        <div class="project-image bg-gradient-to-br from-gray-800 to-gray-950 rounded-t-xl h-40 flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            <i class="fas fa-robot text-white text-4xl z-10 group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">AI Crypto-Dashboard</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm leading-relaxed flex-grow">Интеграция с AI и аналитика</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="tech-tag">Next.js |</span>
+                                <span class="tech-tag">Hugging Face AI |</span>
+                                <span class="tech-tag">Chart.js</span>
+                            </div>
+                            <a href="https://github.com/NikolayViktorovich/crypto-dashboard" target="_blank" class="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 mt-auto">
+                                <i class="fab fa-github"></i>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <a href="https://github.com/NikolayViktorovich/notion-clone" target="_blank" class="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 mt-auto">
-                    <i class="fab fa-github"></i>
-                    GitHub
-                </a>
-            </div>
-        </div>
-        
-        <div class="project-card group flex flex-col">
-            <div class="project-image bg-gradient-to-br from-gray-700 to-gray-900 rounded-t-xl h-40 flex items-center justify-center relative overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                <i class="fas fa-chart-line text-white text-4xl z-10 group-hover:scale-110 transition-transform duration-300"></i>
-            </div>
-            <div class="p-6 flex flex-col flex-grow">
-                <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">CRM система</h3>
-                <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm leading-relaxed flex-grow">Полнофункциональная CRM (коммерческий проект)</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                    <span class="tech-tag">Next.js |</span>
-                    <span class="tech-tag">TypeScript |</span>
-                    <span class="tech-tag">mySQL |</span>
-                    <span class="tech-tag">REST API |</span>
-                </div>
-                <button class="w-full bg-gray-300 dark:bg-gray-700 text-gray-600 dark:text-gray-400 font-medium py-2 px-4 rounded-lg cursor-not-allowed flex items-center justify-center gap-2 mt-auto">
-                    <i class="fas fa-lock"></i>
-                    Private
-                </button>
-            </div>
-        </div>
-        
-        <div class="project-card group flex flex-col">
-            <div class="project-image bg-gradient-to-br from-gray-800 to-gray-950 rounded-t-xl h-40 flex items-center justify-center relative overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                <i class="fas fa-robot text-white text-4xl z-10 group-hover:scale-110 transition-transform duration-300"></i>
-            </div>
-            <div class="p-6 flex flex-col flex-grow">
-                <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">AI Crypto-Dashboard</h3>
-                <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm leading-relaxed flex-grow">Интеграция с AI и аналитика</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                    <span class="tech-tag">Next.js |</span>
-                    <span class="tech-tag">Hugging Face AI |</span>
-                    <span class="tech-tag">Chart.js</span>
-                </div>
-                <a href="https://github.com/NikolayViktorovich/crypto-dashboard" target="_blank" class="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 mt-auto">
-                    <i class="fab fa-github"></i>
-                    GitHub
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+            </section>
+
             <section class="scroll-animate">
                 <h2 class="section-title">ТЕХНОЛОГИИ</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -189,6 +198,7 @@
                     </div>
                 </div>
             </section>
+
             <section class="scroll-animate">
                 <h2 class="section-title">ОБРАЗОВАНИЕ</h2>
                 <div class="space-y-6">
@@ -214,6 +224,7 @@
                     </div>
                 </div>
             </section>
+
             <section class="scroll-animate">
                 <h2 class="section-title">ДОПОЛНИТЕЛЬНО</h2>
                 <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-800">
@@ -221,8 +232,8 @@
                         <div class="flex items-start space-x-4">
                             <i class="fas fa-trophy text-yellow-600 text-xl mt-2"></i>
                             <div>
-                                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Участник хакатонов</h3>
-                                <p class="text-gray-600 dark:text-gray-400 text-sm">Сбер, Яндекс и другие технологические компании</p>
+                                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Победитель хакатона от Сбера</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">Победа в кейсе «Динамический планировщик образовательной траектории»</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-4">
@@ -259,8 +270,5 @@
     </div>
 
     <script src="script.js"></script>
-    <button id="downloadPdf" class="fixed bottom-6 right-6 z-50 p-4 bg-gray-900 hover:bg-gray-800 text-white rounded-full shadow-lg transition-all duration-300">
-    <i class="fas fa-file-pdf text-xl"></i>
-</button>
 </body>
 </html>

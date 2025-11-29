@@ -105,7 +105,9 @@ class ContactForm {
     }
 
     init() {
-        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+        if (this.form) {
+            this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+        }
     }
 
     async handleSubmit(e) {
@@ -204,27 +206,58 @@ class PdfExporter {
     async generatePdf() {
         this.showNotification('Подготовка PDF...', 'info');
         
+        // Сохраняем текущую тему
+        const isDark = document.documentElement.classList.contains('dark');
+        const originalTheme = localStorage.getItem('theme');
+        
+        // Принудительно переключаем на светлую тему для PDF
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+        
+        // Ждем перерисовки
+        await new Promise(resolve => setTimeout(resolve, 500));
+
         try {
-            const element = document.querySelector('.container.mx-auto.px-4.py-8.max-w-5xl');
+            const element = document.getElementById('resume-content');
             
             const opt = {
                 margin: [10, 10, 10, 10],
                 filename: 'Николай-Викторович-Frontend-Developer.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
+                image: { 
+                    type: 'jpeg', 
+                    quality: 0.98 
+                },
                 html2canvas: { 
                     scale: 2,
                     useCORS: true,
                     logging: false,
-                    backgroundColor: '#ffffff'
+                    backgroundColor: '#ffffff',
+                    scrollX: 0,
+                    scrollY: 0,
+                    windowWidth: element.scrollWidth,
+                    windowHeight: element.scrollHeight
                 },
                 jsPDF: { 
                     unit: 'mm', 
                     format: 'a4', 
-                    orientation: 'portrait' 
+                    orientation: 'portrait',
+                    compress: true
+                },
+                pagebreak: { 
+                    mode: ['avoid-all', 'css', 'legacy'] 
                 }
             };
 
-            await html2pdf().set(opt).from(element).save();
+            // Создаем клон элемента для PDF
+            const clone = element.cloneNode(true);
+            clone.style.width = '210mm';
+            clone.style.padding = '0';
+            clone.style.margin = '0';
+            document.body.appendChild(clone);
+            
+            await html2pdf().set(opt).from(clone).save();
+            
+            document.body.removeChild(clone);
             
             this.showNotification('PDF успешно создан!', 'success');
             
@@ -232,17 +265,40 @@ class PdfExporter {
             console.error('Ошибка при создании PDF:', error);
             this.showNotification('Ошибка при создании PDF', 'error');
             this.fallbackPdf();
+        } finally {
+            // Восстанавливаем исходную тему
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', originalTheme);
+            }
         }
     }
 
     fallbackPdf() {
         this.showNotification('Используем альтернативный метод...', 'info');
+        
+        // Простой метод через печать
+        const element = document.getElementById('resume-content');
+        const originalDisplay = element.style.display;
+        
+        element.style.display = 'block';
+        element.style.width = '210mm';
+        element.style.margin = '0 auto';
+        
+        window.print();
+        
+        // Восстанавливаем стили
         setTimeout(() => {
-            window.print();
+            element.style.display = originalDisplay;
+            element.style.width = '';
+            element.style.margin = '';
         }, 1000);
     }
 
     showNotification(message, type) {
+        // Удаляем существующие уведомления
         const existingNotifications = document.querySelectorAll('.pdf-notification');
         existingNotifications.forEach(notification => notification.remove());
         
@@ -267,6 +323,7 @@ class PdfExporter {
     }
 }
 
+// Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
     new ThemeManager();
     new ScrollAnimator();
@@ -275,6 +332,7 @@ document.addEventListener('DOMContentLoaded', function() {
     new SmoothScroll();
     new PdfExporter();
 
+    // Анимации карточек
     document.querySelectorAll('.project-card').forEach(card => {
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-8px)';
@@ -304,6 +362,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('🎯 Портфолио загружено!');
 });
 
+// Service Worker для PWA
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
         const swCode = `
